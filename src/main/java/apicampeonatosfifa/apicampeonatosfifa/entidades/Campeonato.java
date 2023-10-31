@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,15 +35,16 @@ public class Campeonato {
     private Seleccion seleccion;
 
     @Column(name = "año", nullable = false)
-    private String año;
+    private int año;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "campeonato")
     private List<Grupo> grupos = new ArrayList<>();
 
     public Campeonato() {
     }
 
-    public Campeonato(long id, String nombre, Seleccion seleccion, String año) {
+    public Campeonato(long id, String nombre, Seleccion seleccion, int año) {
         this.id = id;
         this.nombre = nombre;
         this.seleccion = seleccion;
@@ -72,11 +75,11 @@ public class Campeonato {
         this.seleccion = seleccion;
     }
 
-    public String getAño() {
+    public int getAño() {
         return año;
     }
 
-    public void setAño(String año) {
+    public void setAño(int año) {
         this.año = año;
     }
 

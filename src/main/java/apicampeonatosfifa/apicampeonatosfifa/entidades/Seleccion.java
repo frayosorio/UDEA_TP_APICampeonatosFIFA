@@ -22,7 +22,7 @@ public class Seleccion {
     @Column(name = "pais", length = 100, unique = true)
     private String nombre;
 
-    @Column(name = "entidad", length = 100, nullable = true)
+    @Column(name = "entidad", length = 100, nullable = false)
     private String entidad;
 
     public Seleccion() {
