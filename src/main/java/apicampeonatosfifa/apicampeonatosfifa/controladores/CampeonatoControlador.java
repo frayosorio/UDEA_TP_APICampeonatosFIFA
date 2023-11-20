@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import apicampeonatosfifa.apicampeonatosfifa.entidades.Campeonato;
+import apicampeonatosfifa.apicampeonatosfifa.entidades.Grupo;
 import apicampeonatosfifa.apicampeonatosfifa.interfaces.ICampeonatoServicio;
 
 @RestController
@@ -35,6 +36,25 @@ public class CampeonatoControlador {
     public Campeonato agregar(@RequestBody Campeonato campeonato) {
         campeonato.setId(0);
         return this.servicio.guardar(campeonato);
+    }
+
+    @RequestMapping(value = "/modificar", method = RequestMethod.PUT)
+    public Campeonato actualizar(@RequestBody Campeonato campeonato) {
+        if (servicio.obtener(campeonato.getId()) != null) {
+            return servicio.guardar(campeonato);
+        } else {
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.DELETE)
+    public boolean eliminar(@PathVariable long id) {
+        return servicio.eliminar(id);
+    }
+
+    @RequestMapping(value = "/grupos/{id}", method = RequestMethod.GET)
+    public List<Grupo> listarGrupos(@PathVariable long id) {
+        return servicio.listarGrupos(id);
     }
 
 }

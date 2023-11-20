@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import apicampeonatosfifa.apicampeonatosfifa.entidades.Campeonato;
+import apicampeonatosfifa.apicampeonatosfifa.entidades.Grupo;
 import apicampeonatosfifa.apicampeonatosfifa.interfaces.ICampeonatoServicio;
 import apicampeonatosfifa.apicampeonatosfifa.repositorios.CampeonatoRepositorio;
 
@@ -41,6 +42,19 @@ public class CampeonatoServicio implements ICampeonatoServicio {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    @Override
+    public List<Grupo> listarGrupos(long id) {
+        // Buscar campeonato por su ID
+        var campeonatoBuscado = repositorio.findById(id);
+
+        if (campeonatoBuscado.isPresent()) {
+            var campeonato = campeonatoBuscado.get();
+
+            return campeonato.getGrupos();
+        }
+        return null;
     }
 
 }
