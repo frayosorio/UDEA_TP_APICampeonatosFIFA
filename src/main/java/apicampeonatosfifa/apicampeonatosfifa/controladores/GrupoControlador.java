@@ -21,6 +21,7 @@ public class GrupoControlador {
         this.servicio = servicio;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/posiciones/{id}", method = RequestMethod.GET)
     public List<TablaPosicion> obtenerPosiciones(@PathVariable int id) {
         return servicio.obtenerPosiciones(id);
